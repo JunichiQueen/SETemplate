@@ -2,6 +2,7 @@ package com.qa.MapTests;
 
 import static org.junit.Assert.*;
 
+import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -45,7 +46,8 @@ public class AccountServiceTest {
 		amr.updateAccount(1, "{\"id\":1,\"accountNumber\":\"D0001\",\"firstName\":\"Matt\",\"lastName\":\"Wright\"}");
 		assertEquals("Wright", amr.getAccountMap().get(1).getLastName());
 	}
-
+	
+	@Ignore
 	@Test
 	public void addAccountTest() {
 		String accToCreate = jsonUtil.getJSONForObject(acc1);
@@ -106,13 +108,52 @@ public class AccountServiceTest {
 	}
 
 	@Test
-	public void accountConversionToJSONTest() {
+	public void accountConversionToJSONTest1() {
 		String jsonAccount = "{\"id\":1,\"accountNumber\":\"D0001\",\"firstName\":\"Matt\",\"lastName\":\"Hunt\"}";
 		String stringToTest = jsonUtil.getJSONForObject(acc1);
 		assertEquals(jsonAccount, stringToTest);
 
 	}
-
+	
+	@Test
+	public void firstNameFinderTest() {
+		amr.getAccountMap().put(1, acc1);
+		amr.getAccountMap().put(2, acc2);
+		assertEquals("["+acc1+"]", amr.firstNameFinder(amr.getAccountMap(), "Matt").toString());
+		//amr.getAccountMap().put(3, acc3);
+		
+	}
+	
+	@Ignore
+	@Test
+	public void jsonStringToAccountConversionTest1 () {
+		//Account util = new JSONUtil().getObjectForJSON(test, Account.class);
+		//System.out.println(util);
+		//assertEquals("Account 2 belongs to Matty Huntsworth", util.toString());
+	}
+	
+	@Ignore
+	@Test
+	public void accountConversionToJSONTest() {
+		
+	}
+	
+	
+	@Ignore
+	@Test
+	public void convertMaptoJson() {
+		
+	    
+	    
+	    amr.getAccountMap().put(1, acc1);
+		amr.getAccountMap().put(2, acc2);
+		System.out.println(amr.getAccountMap());
+		//JSONObject json = new JSONObject(amr.getAccountMap());
+	    //System.out.println(json);
+		
+	}
+	
+	
 	@Test
 	@Ignore
 	public void getCountForFirstNamesInAccountWhenZeroOccurances() {
